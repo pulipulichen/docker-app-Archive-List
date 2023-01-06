@@ -20,7 +20,7 @@ let main = async function () {
 
     let cmd
     if (fs.lstatSync(file).isDirectory()) {
-      cmd = `cd "${file}"; 7z a "${path.resolve(dirname, filename + '.7z')}" -mcu=on *`
+      cmd = `cd "${file}"; 7z a "${path.resolve(dirname, filename + '.7z')}" -mcu=on -bb1 *`
     }
     else {
       let ext
