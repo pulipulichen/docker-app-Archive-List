@@ -45,7 +45,7 @@ let main = async function () {
     if (isCompress === false) {
       let targetFolder = path.resolve(dirname, filenameNoExt)
       while (true) {
-        if (targetFolder) {
+        if (targetFolder && fs.lstatSync(targetFolder).isDirectory()) {
           let list = fs.readdirSync(targetFolder)
           if (list.length > 1) {
             break
@@ -62,6 +62,9 @@ let main = async function () {
           else {
             break
           }
+        }
+        else {
+          break
         }
       } 
     }
