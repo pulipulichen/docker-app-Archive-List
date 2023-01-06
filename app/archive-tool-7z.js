@@ -20,7 +20,7 @@ let main = async function () {
 
     let cmd
     if (fs.lstatSync(file).isDirectory()) {
-      cmd = `cd "${file}"; 7z a "${path.resolve(dirname, filename + '.7z')}" -mcu=on -bb1 *`
+      cmd = `cd "${file}"; 7z a -t7z "${path.resolve(dirname, filename + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 *`
     }
     else {
       let ext
@@ -31,11 +31,11 @@ let main = async function () {
       }
 
       if (ext === '7z') {
-        cmd = `7z x "${file}" -o"${path.resolve(dirname, filenameNoExt)}" -cu=on`
+        cmd = `7z x "${file}" -o"${path.resolve(dirname, filenameNoExt)}"`
         isCompress = false
       }
       else {
-        cmd = `7z a -t7z "${path.resolve(dirname, filenameNoExt + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 -mmt=off -mcu=on "${file}"`
+        cmd = `7z a -t7z "${path.resolve(dirname, filenameNoExt + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 "${file}"`
       }
     }
 
