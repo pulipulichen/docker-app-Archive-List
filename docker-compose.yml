@@ -7,4 +7,4 @@ services:
     volumes: 
       - ./app:/app/
       - ./cache:/cache/
-      - .:/input/
+      - /tmp/tmp.today/20230106-1656/:/input/

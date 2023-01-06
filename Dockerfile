@@ -6,8 +6,9 @@ RUN apt-get install -y \
     p7zip-full \
     language-pack-zh-hans
 
-RUN locale-gen zh_TW.UTF-8  
-ENV LC_ALL=zh_TW.UTF-8
+RUN locale-gen C.UTF-8  
+ENV LC_ALL=C.UTF-8
+RUN echo "export LANG=C.UTF-8 >> /etc/profile"
 
 # COPY package.json /
 # RUN npm install
