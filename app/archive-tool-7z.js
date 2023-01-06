@@ -35,7 +35,7 @@ let main = async function () {
         isCompress = false
       }
       else {
-        cmd = `7z a -t7z "${path.resolve(dirname, filenameNoExt + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 -cu=on "${file}"`
+        cmd = `7z a -t7z "${path.resolve(dirname, filenameNoExt + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 -mmt=off -mcu=on "${file}"`
       }
     }
 
