@@ -50,9 +50,14 @@ let main = async function () {
           if (list.length > 1) {
             break
           }
-          else if (list.length === 1 && fs.lstatSync(path.resolve(targetFolder, list[0])).isDirectory()) {
-            let folderPath = path.resolve(targetFolder, list[0])
-            await ShellExec(`cd "${folderPath}"; mv * ../; cd ../; rm -rf "${list[0]}"`)
+          else if (list.length === 1) {
+            if (fs.lstatSync(path.resolve(targetFolder, list[0])).isDirectory()) {
+              let folderPath = path.resolve(targetFolder, list[0])
+              await ShellExec(`cd "${folderPath}"; mv * ../; cd ../; rm -rf "${list[0]}"`)
+            }
+            else {
+              await ShellExec(`cd "${targetFolder}"; cp -f * ../; cd ../; rm -rf "${path.basename(targetFolder)}"`)
+            }
           }
           else {
             break
