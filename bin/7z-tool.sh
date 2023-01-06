@@ -8,7 +8,7 @@ PROJECT_NAME=docker-app-Archive-7-zip
 var="$1"
 useParams="true"
 WORK_DIR=`pwd`
-if [ ! -f "$var" ]; then
+if [ ! -f "$var" ] && [ ! -d "$var" ]; then
   # echo "$1 does not exist."
   # exit
   var=$(kdialog --getopenfilename --multiple ~/ 'application/zip')
@@ -79,7 +79,7 @@ if [ "${useParams}" == "true" ]; then
     node "/tmp/${PROJECT_NAME}/index.js" "${var}"
   done
 else
-  if [ ! -f "${var}" ]; then
+  if [ ! -f "${var}"  ] && [ ! -d "${var}"  ]; then
     echo "$var does not exist."
     exit
   fi
