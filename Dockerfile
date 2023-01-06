@@ -8,9 +8,12 @@ RUN apt-get install -y \
 
 RUN locale-gen C.UTF-8  
 ENV LC_ALL=C.UTF-8
-RUN echo "export LANG=C.UTF-8 >> /etc/profile"
+ENV LC_LAGNlo=C.UTF-8
+RUN echo "export LANG=C.UTF-8" >> /etc/profile
 
 # COPY package.json /
 # RUN npm install
+
+RUN localedef -c -f UTF-8 -i zh_TW zh_TW.utf8
 
 CMD ["bash"]
