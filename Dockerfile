@@ -3,7 +3,7 @@ FROM node:18.12.1-buster
 RUN apt-get update
 
 RUN apt-get install -y \
-    p7zip-full locale-gen
+    p7zip-full locales locales-all
 
 RUN locale-gen C.UTF-8  
 ENV LC_ALL=C.UTF-8
