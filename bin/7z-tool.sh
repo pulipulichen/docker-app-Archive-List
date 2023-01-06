@@ -11,7 +11,7 @@ WORK_DIR=`pwd`
 if [ ! -f "$var" ] && [ ! -d "$var" ]; then
   # echo "$1 does not exist."
   # exit
-  var=$(kdialog --getopenfilename --multiple ~/ 'application/zip')
+  var=$(kdialog --getopenfilename --multiple ~/ '*')
   var=`echo "${var}" | xargs`
   useParams="false"
 fi

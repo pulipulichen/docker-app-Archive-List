@@ -31,7 +31,7 @@ let main = async function () {
         filenameNoExt = filenameNoExt.slice(0, filenameNoExt.lastIndexOf('.'))
       }
 
-      if (ext === '7z') {
+      if (ext === '7z' || ext === 'zip') {
         cmd = `7z x "${file}" -o"${path.resolve(dirname, filenameNoExt)}"`
         isCompress = false
       }
