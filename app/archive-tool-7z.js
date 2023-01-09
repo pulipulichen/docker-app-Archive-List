@@ -59,11 +59,16 @@ let main = async function () {
       }
 
       if (ext === '7z' || ext === 'zip') {
-        cmd = `7z x "${file}" -o"${path.resolve(dirname, filenameNoExt)}"`
+        let dotPos = filenameNoExt.lastIndexOf('.')
+        let filenameNoExt2 = filenameNoExt
+        if (dotPos > filenameNoExt.length - 5) {
+          filenameNoExt2 = filenameNoExt.slice(0, dotPos)
+        }
+        cmd = `7z x "${file}" -o"${path.resolve(dirname, filenameNoExt2)}"`
         isCompress = false
       }
       else {
-        cmd = `7z a -t7z "${path.resolve(dirname, filenameNoExt + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 "${file}"`
+        cmd = `7z a -t7z "${path.resolve(dirname, filename + '.7z')}" -mx9 -aoa -ms=on -m0=lzma2 "${file}"`
       }
     }
 
