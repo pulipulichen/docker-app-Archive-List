@@ -58,7 +58,7 @@ let main = async function () {
         filenameNoExt = filenameNoExt.slice(0, filenameNoExt.lastIndexOf('.'))
       }
 
-      if (ext === '7z' || ext === 'zip') {
+      if (ext === '7z' || ext === 'zip' || ext === 'rar') {
         let dotPos = filenameNoExt.lastIndexOf('.')
         let filenameNoExt2 = filenameNoExt
         if (dotPos > filenameNoExt.length - 5) {
@@ -85,6 +85,11 @@ let main = async function () {
           else if (list.length === 1) {
             if (fs.lstatSync(path.resolve(targetFolder, list[0])).isDirectory()) {
               let folderPath = path.resolve(targetFolder, list[0])
+              let subList = fs.readdirSync(folderPath)
+              if (subList.length > 1) {
+                break
+              }
+
               await ShellExec(`cd "${folderPath}"; mv * ../; cd ../; rm -rf "${list[0]}"`)
             }
             else {
