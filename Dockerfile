@@ -1,14 +1,14 @@
-FROM node:20.2.0-bullseye
+FROM sitespeedio/node:ubuntu-20.04-nodejs-12.14.1
 
 RUN apt-get update
 
 RUN apt-get install -y \
     p7zip-full locales locales-all
 
-RUN locale-gen C.UTF-8  
-ENV LC_ALL=C.UTF-8
-ENV LC_LAGNlo=C.UTF-8
-RUN echo "export LANG=C.UTF-8" >> /etc/profile
+RUN locale-gen zh_TW.UTF-8  
+ENV LC_ALL=zh_TW.UTF-8
+ENV LC_LAGNlo=zh_TW.UTF-8
+RUN echo "export LANG=zh_TW.UTF-8" >> /etc/profile
 
 # COPY package.json /
 # RUN npm install
