@@ -64,7 +64,7 @@ let main = async function () {
         if (filenameNoExt.length < 6 || dotPos > filenameNoExt.length - 5) {
           filenameNoExt2 = filenameNoExt.slice(0, dotPos)
         }
-        cmd = `unzip -O big5 "${file}" -d "${filenameNoExt2}"`
+        cmd = `unzip -O big5 "${file}" -d "${path.resolve(dirname, filenameNoExt2)}"`
         isCompress = false
       }
       else {
