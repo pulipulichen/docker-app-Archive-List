@@ -72,7 +72,7 @@ let main = async function () {
       }
     }
 
-    await ShellExec(cmd)
+    await ShellSpawn(cmd)
     
     if (isCompress === false) {
       let targetFolder = path.resolve(dirname, filenameNoExt)
