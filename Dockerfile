@@ -18,3 +18,4 @@ RUN localedef -c -f UTF-8 -i zh_TW zh_TW.utf8
 CMD ["bash"]
 
 RUN apt-get install -y unzip
+RUN npm install mime excel4node

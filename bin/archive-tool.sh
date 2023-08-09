@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME=docker-app-Archive-7-zip
+PROJECT_NAME=docker-app-Archive-List
 
 # -------------------
 
