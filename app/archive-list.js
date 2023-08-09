@@ -48,6 +48,10 @@ let main = async function () {
     else {
       // RemoveList(directoryPath)
       let tmpDirectory = ArchiveToDirectory(directoryPath)
+      if (!tmpDirectory) {
+        console.error('tmp directory does not exist')
+        continue
+      }
 
       fs.rmdirSync(directoryPath, { recursive: true });
       fs.renameSync(tmpDirectory, directoryPath);
