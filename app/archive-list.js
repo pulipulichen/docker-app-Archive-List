@@ -23,7 +23,7 @@ let main = async function () {
   let files = GetExistedArgv()
   for (let i = 0; i < files.length; i++) {
     let directoryPath = files[i]
-    const stats = fs.statSync(filePath);
+    const stats = fs.statSync(directoryPath);
     if (stats.isDirectory(directoryPath) === false) {
       directoryPath = path.dirname(directoryPath)
     }
