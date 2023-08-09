@@ -26,8 +26,8 @@ function CheckDirectory(directoryPath) {
       console.log('Directory contains the required files.');
       return true
     } else {
-      // console.log('Directory does not contain the required files.', foundExtensions.length, foundExtensions.includes('.list.7z'), foundExtensions.includes('.list.xlsx'));
-      console.log('Directory does not contain the required files.');
+      console.log('Directory does not contain the required files.', foundExtensions.length, foundExtensions.includes('.list.7z'), foundExtensions.includes('.list.xlsx'));
+      // console.log('Directory does not contain the required files.');
       return false
     }
   } catch (error) {
