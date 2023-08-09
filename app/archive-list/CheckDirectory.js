@@ -20,7 +20,7 @@ function CheckDirectory(directoryPath) {
         }
       }
     }
-    // console.log(files)
+    console.log(files)
 
     if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.xlsx')) {
       console.log('Directory contains the required files.');
