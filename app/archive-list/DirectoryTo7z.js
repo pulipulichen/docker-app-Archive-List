@@ -34,9 +34,9 @@ let DirectoryTo7z = async (folderPath) => {
   let filename = path.basename(folderPath)
   let dirname = path.dirname(folderPath)
 
-  let outputFilePath = path.resolve(dirname, filename + '.7z')
+  let outputFilePath = path.resolve(dirname, filename + '.list.7z')
 
-  cmd = `cd "${folderPath}"; 7z a -t7z "${outputFilePath}" -mx9 -aoa -ms=on -m0=lzma2 *`
+  let cmd = `cd "${folderPath}"; 7z a -t7z "${outputFilePath}" -mx9 -aoa -ms=on -m0=lzma2 *`
   await ShellSpawn(cmd)
 
   return outputFilePath
