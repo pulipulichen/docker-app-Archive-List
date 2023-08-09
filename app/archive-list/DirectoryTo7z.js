@@ -1,7 +1,7 @@
 
 const path = require('path')
 const fs = require('fs')
-const ShellSpawn = require('./lib/ShellSpawn')
+const ShellSpawn = require('./../lib/ShellSpawn')
 
 let DirectoryTo7z = async (folderPath) => {
   let noFiles = false
