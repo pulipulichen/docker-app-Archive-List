@@ -47,7 +47,7 @@ let main = async function () {
     }
     else {
       // RemoveList(directoryPath)
-      let tmpDirectory = ArchiveToDirectory(directoryPath)
+      let tmpDirectory = await ArchiveToDirectory(directoryPath)
       if (!tmpDirectory) {
         console.error('tmp directory does not exist')
         continue
