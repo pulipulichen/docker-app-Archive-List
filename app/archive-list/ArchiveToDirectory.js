@@ -34,7 +34,7 @@ let ArchiveToDirectory = async (directoryPath) => {
       filenameNoExt2 = filenameNoExt.slice(0, dotPos)
     }
     filenameNoExt2 = filenameNoExt2 + '.tmp'
-    outputFolderPath = path.resolve(filenameNoExt2)
+    outputFolderPath = path.resolve(dirname, filenameNoExt2)
     cmd = `7z x "${archiveFilePath}" -o"${outputFolderPath}"`
     isCompress = false
   }
