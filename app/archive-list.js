@@ -29,7 +29,7 @@ let main = async function () {
 
     if (CheckDirecotry(directoryPath) === false) {
       let listFilePath = DirectoryToList(directoryPath)
-      let archiveFilePath = DirectoryToList(directoryPath)
+      let archiveFilePath = DirectoryTo7z(directoryPath)
       console.log(listFilePath, archiveFilePath)
     }
   }
