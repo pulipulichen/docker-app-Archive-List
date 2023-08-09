@@ -32,11 +32,11 @@ let DirectoryToList = (directoryPath) => {
 
       let extname = ''
       let mimeType = ''
-      let size = ''
+      let size = stats.size / (1024 * 1024)
       if (stats.isDirectory() === false) {
         extname = path.extname(file);
         mimeType = mime.getType(file);
-        size = stats.size / (1024 * 1024)
+        // size = stats.size / (1024 * 1024)
       }
 
       worksheet.cell(row, 1).string('/' + path.relative(topDirectoryPath, filePath));
