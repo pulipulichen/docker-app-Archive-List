@@ -1,6 +1,6 @@
 
 const mime = require('mime');
-const ExcelJS = require('exceljs');
+const XLSX = require('xlsx');
 
 const path = require('path')
 const fs = require('fs')
@@ -48,29 +48,28 @@ let DirectoryToList = async (directoryPath) => {
   const filesInfo = [];
   traverseDirectory(directoryPath, filesInfo, topDirectoryPath);
 
-  const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet('File Information');
-  
-  // Add headers
-  worksheet.addRow([
+  const headers = [
     'Relative Path', 'Filename', 'Extension', 'MIME Type', 'File Size (MB)', 'Create Time', 'Last Modified Time'
-  ]);
-  
-  // Add file information rows
+  ];
+
+  const data = [headers];
   for (const fileInfo of filesInfo) {
-    worksheet.addRow([
+    data.push([
       fileInfo.relativePath,
       fileInfo.filename,
       fileInfo.ext,
       fileInfo.mimeType,
       fileInfo.fileSizeMB,
-      fileInfo.createTime,
-      fileInfo.lastModifiedTime
+      fileInfo.createTime.toString(),
+      fileInfo.lastModifiedTime.toString()
     ]);
   }
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'File Information');
   
-  // Save the workbook to the specified output file path
-  await workbook.xlsx.writeFile(outputFilePath);
+  XLSX.writeFile(wb, outputFilePath);
 
   return outputFilePath
 }
