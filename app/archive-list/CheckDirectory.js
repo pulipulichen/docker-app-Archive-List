@@ -5,7 +5,7 @@ function CheckDirectory(directoryPath) {
   try {
     const files = fs.readdirSync(directoryPath);
 
-    const validExtensions = ['.list.7z', '.list.xlsx'];
+    const validExtensions = ['.list.7z', '.list.ods'];
     let foundExtensions = [];
 
     for (const file of files) {
