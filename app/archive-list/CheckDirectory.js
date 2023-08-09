@@ -9,13 +9,20 @@ function CheckDirectory(directoryPath) {
     let foundExtensions = [];
 
     for (const file of files) {
-      const fileExtension = path.extname(file);
-      if (validExtensions.includes(fileExtension)) {
-        foundExtensions.push(fileExtension);
+      // const fileExtension = path.extname(file);
+      // if (validExtensions.includes(fileExtension)) {
+      //   foundExtensions.push(fileExtension);
+      // }
+      for (const extension of validExtensions) {
+        if (file.endsWith(extension)) {
+          foundExtensions.push(extension);
+          break
+        }
       }
     }
+    console.log(files)
 
-    if (foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.xlsx')) {
+    if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.xlsx')) {
       console.log('Directory contains the required files.');
       return true
     } else {
