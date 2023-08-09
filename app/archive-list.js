@@ -16,7 +16,7 @@ let main = async function () {
   for (let i = 0; i < files.length; i++) {
     let directoryPath = files[i]
     
-    const outputFilePath = directoryPath + '.ods';
+    const outputFilePath = directoryPath + '.xlsx';
 
     const workbook = new excel.Workbook();
     const worksheet = workbook.addWorksheet('Files');
