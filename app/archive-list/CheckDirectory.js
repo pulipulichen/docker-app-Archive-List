@@ -20,14 +20,14 @@ function CheckDirectory(directoryPath) {
         }
       }
     }
-    console.log(files)
+    // console.log(files)
 
-    if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.xlsx')) {
+    if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.ods')) {
       console.log('Directory contains the required files.');
       return true
     } else {
-      console.log('Directory does not contain the required files.', foundExtensions.length, foundExtensions.includes('.list.7z'), foundExtensions.includes('.list.xlsx'));
-      // console.log('Directory does not contain the required files.');
+      // console.log('Directory does not contain the required files.', foundExtensions.length, foundExtensions.includes('.list.7z'), foundExtensions.includes('.list.ods'));
+      console.log('Directory does not contain the required files.');
       return false
     }
   } catch (error) {
