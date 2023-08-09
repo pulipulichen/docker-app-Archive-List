@@ -30,7 +30,7 @@ let main = async function () {
 
     if (CheckDirecotry(directoryPath) === false) {
       let listFilePath = DirectoryToList(directoryPath)
-      let archiveFilePath = DirectoryTo7z(directoryPath)
+      let archiveFilePath = await DirectoryTo7z(directoryPath)
       console.log(listFilePath, archiveFilePath)
     }
   }
