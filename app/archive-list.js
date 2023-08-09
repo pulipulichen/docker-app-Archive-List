@@ -15,6 +15,7 @@ let main = async function () {
   let files = GetExistedArgv()
   for (let i = 0; i < files.length; i++) {
     let directoryPath = files[i]
+    let topDirectoryPath = directoryPath
     
     const outputFilePath = directoryPath + '.xlsx';
 
@@ -38,7 +39,7 @@ let main = async function () {
         const filePath = path.join(directoryPath, file);
         const stats = fs.statSync(filePath);
 
-        worksheet.cell(row, 1).string(path.relative(directoryPath, filePath));
+        worksheet.cell(row, 1).string(path.relative(topDirectoryPath, filePath));
         worksheet.cell(row, 2).string(file);
         worksheet.cell(row, 3).string(path.extname(file));
         worksheet.cell(row, 4).string(mime.getType(file));
