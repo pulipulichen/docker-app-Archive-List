@@ -30,11 +30,20 @@ let DirectoryToList = (directoryPath) => {
       const filePath = path.join(directoryPath, file);
       const stats = fs.statSync(filePath);
 
+      let extname = ''
+      let mimeType = ''
+      let size = ''
+      if (stats.isDirectory() === false) {
+        extname = path.extname(file);
+        mimeType = mime.getType(file);
+        size = stats.size / (1024 * 1024)
+      }
+
       worksheet.cell(row, 1).string('/' + path.relative(topDirectoryPath, filePath));
       worksheet.cell(row, 2).string(file);
-      worksheet.cell(row, 3).string(path.extname(file));
-      worksheet.cell(row, 4).string(mime.getType(file));
-      worksheet.cell(row, 5).number(stats.size / (1024 * 1024)); // Convert to MB
+      worksheet.cell(row, 3).string(extname);
+      worksheet.cell(row, 4).string(mimeType);
+      worksheet.cell(row, 5).number(size); // Convert to MB
       worksheet.cell(row, 6).date(stats.birthtime);
       worksheet.cell(row, 7).date(stats.mtime);
 
