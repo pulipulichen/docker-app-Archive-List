@@ -45,6 +45,21 @@ let main = async function () {
       fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
 
       fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+
+      let gdriveDir = path.join(path.dirname(directoryPath), 'gdrive')
+      if (fs.existsSync(gdriveDir) === false) {
+        fs.mkdirSync(gdriveDir)
+      }
+
+      let gdriveArchiveDir = path.join(gdriveDir, path.basename(directoryPath))
+      if (fs.existsSync(gdriveArchiveDir) === false) {
+        fs.mkdirSync(gdriveArchiveDir)
+      }
+
+      let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
+      if (fs.existsSync(gdriveArchiveFile) === false) {
+        fs.copyFileSync(listFilePath, gdriveArchiveFile)
+      }
     }
     else {
       // RemoveList(directoryPath)
