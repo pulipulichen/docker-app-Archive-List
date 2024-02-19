@@ -42,6 +42,7 @@ let main = async function () {
 
       // fs.copyFileSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
       fs.renameSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
+      listFilePath = path.join(directoryPath, path.basename(listFilePath))
       fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
 
       fs.rmdirSync(directoryPath + '.bak', { recursive: true });
