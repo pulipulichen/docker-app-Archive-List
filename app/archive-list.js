@@ -58,6 +58,7 @@ let main = async function () {
 
       let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
       if (fs.existsSync(gdriveArchiveFile) === false) {
+        console.log({listFilePath, gdriveArchiveFile})
         fs.copyFileSync(listFilePath, gdriveArchiveFile)
       }
     }
