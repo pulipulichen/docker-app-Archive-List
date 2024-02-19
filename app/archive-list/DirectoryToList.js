@@ -44,7 +44,7 @@ function traverseDirectory(directoryPath, filesInfo, topDirectoryPath) {
 let DirectoryToList = async (directoryPath) => {
   let topDirectoryPath = directoryPath  
 
-  const outputFilePath = directoryPath + '.list.ods';
+  const outputFilePath = directoryPath + '.list.xlsx';
   const filesInfo = [];
   traverseDirectory(directoryPath, filesInfo, topDirectoryPath);
 

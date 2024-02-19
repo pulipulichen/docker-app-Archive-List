@@ -5,7 +5,7 @@ function CheckDirectory(directoryPath) {
   try {
     const files = fs.readdirSync(directoryPath);
 
-    const validExtensions = ['.list.7z', '.list.ods'];
+    const validExtensions = ['.list.7z', '.list.xlsx'];
     let foundExtensions = [];
 
     for (const file of files) {
@@ -22,7 +22,7 @@ function CheckDirectory(directoryPath) {
     }
     // console.log(files)
 
-    if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.ods')) {
+    if (files.length === 2 && foundExtensions.length === 2 && foundExtensions.includes('.list.7z') && foundExtensions.includes('.list.xlsx')) {
       console.log('Directory contains the required files.');
       return true
     } else {
