@@ -9,7 +9,7 @@ let DirectoryTo7z = async (folderPath) => {
   const items = fs.readdirSync(folderPath);
   // Filter only `.xlsx` files
   const xlsxFiles = items.filter(item => {
-      const itemPath = path.join(directoryPath, item);
+      const itemPath = path.join(folderPath, item);
       return fs.statSync(itemPath).isFile() && path.extname(item).toLowerCase() === '.xlsx';
   });
   if (xlsxFiles.length === 1) {
