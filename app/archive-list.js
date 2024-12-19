@@ -53,7 +53,7 @@ let main = async function () {
 
       if (archiveFilePath !== false) {
         let listFilePath = await DirectoryToList(directoryPath)
-        
+
         fs.renameSync(directoryPath, directoryPath + '.bak')
         fs.mkdirSync(directoryPath)
 
@@ -62,13 +62,30 @@ let main = async function () {
         listFilePath = path.join(directoryPath, path.basename(listFilePath))
         fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
 
-        fs.rmdirSync(directoryPath + '.bak', { recursive: true });
-        
-        let gdriveArchiveDir = path.join(gdriveDir, path.basename(directoryPath))
-        if (fs.existsSync(gdriveArchiveDir) === false) {
-          fs.mkdirSync(gdriveArchiveDir)
+        // =========
+
+        // check if there are note.xlsx in the folder
+        let noteFilePath = path.join(directoryPath + ".bak", path.basename(directoryPath) + '.note.xlsx')
+        if (fs.existsSync(noteFilePath)) {
+          fs.copyFileSync(noteFilePath, path.join(directoryPath, path.basename(noteFilePath)))
+          fs.renameSync(noteFilePath, path.join(gdriveArchiveDir, path.basename(noteFilePath)))
         }
 
+        // Remove the backup directory
+        // fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+        
+        // Move the archive to gdrive directory
+        // fs.renameSync(archiveFilePath, path.join(gdriveDir, path.basename(archiveFilePath)));
+
+        // Move the list to gdrive directory
+        // fs.renameSync(listFilePath, path.join(gdriveDir, path.basename(listFilePath)));
+
+        // Remove the backup directory
+
+        // =========
+
+        fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+      
         let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
         if (fs.existsSync(gdriveArchiveFile) === false) {
           console.log({listFilePath, gdriveArchiveFile})
