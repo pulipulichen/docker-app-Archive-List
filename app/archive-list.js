@@ -38,18 +38,8 @@ let main = async function () {
       let listFilePath = await DirectoryToList(directoryPath)
       let archiveFilePath = await DirectoryTo7z(directoryPath)
       // console.log(listFilePath, archiveFilePath)
-      throw new Error(archiveFilePath)
+      // throw new Error(archiveFilePath)
 
-      fs.renameSync(directoryPath, directoryPath + '.bak')
-      fs.mkdirSync(directoryPath)
-
-      // fs.copyFileSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
-      fs.renameSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
-      listFilePath = path.join(directoryPath, path.basename(listFilePath))
-      fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
-
-      fs.rmdirSync(directoryPath + '.bak', { recursive: true });
-      
       let gdriveDir = path.join(path.dirname(directoryPath), 'gdrive')
       if (fs.existsSync(gdriveDir) === false) {
         fs.mkdirSync(gdriveDir)
@@ -60,11 +50,39 @@ let main = async function () {
         fs.mkdirSync(gdriveArchiveDir)
       }
 
-      let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
-      if (fs.existsSync(gdriveArchiveFile) === false) {
-        console.log({listFilePath, gdriveArchiveFile})
-        fs.copyFileSync(listFilePath, gdriveArchiveFile)
+      if (archiveFilePath !== false) {
+        fs.renameSync(directoryPath, directoryPath + '.bak')
+        fs.mkdirSync(directoryPath)
+
+        // fs.copyFileSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
+        fs.renameSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
+        listFilePath = path.join(directoryPath, path.basename(listFilePath))
+        fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
+
+        fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+        
+        let gdriveArchiveDir = path.join(gdriveDir, path.basename(directoryPath))
+        if (fs.existsSync(gdriveArchiveDir) === false) {
+          fs.mkdirSync(gdriveArchiveDir)
+        }
+
+        let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
+        if (fs.existsSync(gdriveArchiveFile) === false) {
+          console.log({listFilePath, gdriveArchiveFile})
+          fs.copyFileSync(listFilePath, gdriveArchiveFile)
+        }
       }
+      else {
+
+        // Read all files and directories in the given path
+        const items = fs.readdirSync(directoryPath);
+        // Filter only `.xlsx` files
+        const xlsxFiles = items.filter(item => {
+            const itemPath = path.join(directoryPath, item);
+            return fs.statSync(itemPath).isFile() && path.extname(item).toLowerCase() === '.xlsx';
+        });
+        throw new Error(xlsxFiles)
+      } 
     }
     else {
       // RemoveList(directoryPath)
