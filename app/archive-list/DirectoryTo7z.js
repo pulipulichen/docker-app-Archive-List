@@ -6,7 +6,7 @@ const ShellSpawn = require('./../lib/ShellSpawn')
 let DirectoryTo7z = async (folderPath) => {
 
   // Read all files and directories in the given path
-  const items = fs.readdirSync(directoryPath);
+  const items = fs.readdirSync(folderPath);
   // Filter only `.xlsx` files
   const xlsxFiles = items.filter(item => {
       const itemPath = path.join(directoryPath, item);
