@@ -81,7 +81,9 @@ let main = async function () {
             const itemPath = path.join(directoryPath, item);
             return fs.statSync(itemPath).isFile() && path.extname(item).toLowerCase() === '.xlsx';
         });
-        throw new Error(xlsxFiles)
+
+        const itemPath = path.join(directoryPath, xlsxFiles[0]);
+        fs.copyFileSync(itemPath, path.join(gdriveArchiveDir, path.basename(itemPath)))
       } 
     }
     else {
