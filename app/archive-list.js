@@ -35,8 +35,9 @@ let main = async function () {
     // throw new Error(CheckDirecotry(directoryPath))
     // return console.log(CheckDirecotry(directoryPath))
     if (CheckDirecotry(directoryPath) === false) {
-      let listFilePath = await DirectoryToList(directoryPath)
+      
       let archiveFilePath = await DirectoryTo7z(directoryPath)
+      
       // console.log(listFilePath, archiveFilePath)
       // throw new Error(archiveFilePath)
 
@@ -51,6 +52,8 @@ let main = async function () {
       }
 
       if (archiveFilePath !== false) {
+        let listFilePath = await DirectoryToList(directoryPath)
+        
         fs.renameSync(directoryPath, directoryPath + '.bak')
         fs.mkdirSync(directoryPath)
 
