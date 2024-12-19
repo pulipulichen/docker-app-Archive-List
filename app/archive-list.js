@@ -39,7 +39,7 @@ let main = async function () {
       let archiveFilePath = await DirectoryTo7z(directoryPath)
       
       // console.log(listFilePath, archiveFilePath)
-      // throw new Error(archiveFilePath)
+      throw new Error(archiveFilePath)
 
       let gdriveDir = path.join(path.dirname(directoryPath), 'gdrive')
       if (fs.existsSync(gdriveDir) === false) {
