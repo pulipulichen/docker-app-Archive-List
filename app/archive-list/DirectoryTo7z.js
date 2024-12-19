@@ -12,7 +12,7 @@ let DirectoryTo7z = async (folderPath) => {
       const itemPath = path.join(folderPath, item);
       return fs.statSync(itemPath).isFile() && path.extname(item).toLowerCase() === '.xlsx';
   });
-  if (xlsxFiles.length === 1) {
+  if (items.length === 1 && xlsxFiles.length === 1) {
       return false
   }
 
