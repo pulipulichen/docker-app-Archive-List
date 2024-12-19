@@ -66,7 +66,7 @@ let main = async function () {
 
         // check if there are note.xlsx in the folder
         let noteFilePath = path.join(directoryPath + ".bak", path.basename(directoryPath) + '.note.xlsx')
-        console.log(noteFilePath, fs.existsSync(noteFilePath))
+        // console.log(noteFilePath, fs.existsSync(noteFilePath))
         if (fs.existsSync(noteFilePath)) {
           fs.copyFileSync(noteFilePath, path.join(directoryPath, path.basename(noteFilePath)))
           fs.renameSync(noteFilePath, path.join(gdriveArchiveDir, path.basename(noteFilePath)))
