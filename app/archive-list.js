@@ -34,19 +34,24 @@ let main = async function () {
     // return console.log(CheckDirecotry(directoryPath))
     if (CheckDirecotry(directoryPath) === false) {
       let listFilePath = await DirectoryToList(directoryPath)
-      let archiveFilePath = await DirectoryTo7z(directoryPath)
-      // console.log(listFilePath, archiveFilePath)
 
-      fs.renameSync(directoryPath, directoryPath + '.bak')
-      fs.mkdirSync(directoryPath)
+      throw new Error(listFilePath)
 
-      // fs.copyFileSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
-      fs.renameSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
-      listFilePath = path.join(directoryPath, path.basename(listFilePath))
-      fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
+      if (listFilePath.length > 1) {
+        let archiveFilePath = await DirectoryTo7z(directoryPath)
+        // console.log(listFilePath, archiveFilePath)
 
-      fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+        fs.renameSync(directoryPath, directoryPath + '.bak')
+        fs.mkdirSync(directoryPath)
 
+        // fs.copyFileSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
+        fs.renameSync(listFilePath, path.join(directoryPath, path.basename(listFilePath)));
+        listFilePath = path.join(directoryPath, path.basename(listFilePath))
+        fs.renameSync(archiveFilePath, path.join(directoryPath, path.basename(archiveFilePath)));
+
+        fs.rmdirSync(directoryPath + '.bak', { recursive: true });
+      }
+      
       let gdriveDir = path.join(path.dirname(directoryPath), 'gdrive')
       if (fs.existsSync(gdriveDir) === false) {
         fs.mkdirSync(gdriveDir)
