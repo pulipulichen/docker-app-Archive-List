@@ -27,12 +27,14 @@ let main = async function () {
 
 		// fs.renameSync(file, tempFilePath)
 
-		console.log(file)
-		continue
 		// ------------
     
     // SetDockerComposeYML(tempFilePath)
 		SetDockerComposeYML(file)
+		
+		console.log(file)
+		continue
+		
     await ShellSpawn('docker-compose up')
 
 		// --------------

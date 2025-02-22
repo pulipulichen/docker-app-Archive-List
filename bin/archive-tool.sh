@@ -101,6 +101,7 @@ else
     echo "$var does not exist."
     exit
   fi
+  cd "/tmp/${PROJECT_NAME}"
   node "/tmp/${PROJECT_NAME}/index.js" "${var}"
 fi
 
