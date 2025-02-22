@@ -103,6 +103,7 @@ else
   fi
   cd "/tmp/${PROJECT_NAME}"
   node "/tmp/${PROJECT_NAME}/index.js" "${var}"
+  docker compose up
 fi
 
 
