@@ -95,7 +95,7 @@ if [ "${useParams}" == "true" ]; then
     # echo "${var}"
     cd "/tmp/${PROJECT_NAME}"
     node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-    docker compose up
+    docker-compose up
   done
 else
   if [ ! -f "${var}"  ] && [ ! -d "${var}"  ]; then
@@ -104,7 +104,7 @@ else
   fi
   cd "/tmp/${PROJECT_NAME}"
   node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-  docker compose up
+  docker-compose up
 fi
 
 
