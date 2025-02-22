@@ -27,6 +27,8 @@ let main = async function () {
 
 		// fs.renameSync(file, tempFilePath)
 
+		console.log(file)
+		continue
 		// ------------
     
     // SetDockerComposeYML(tempFilePath)
