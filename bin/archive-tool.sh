@@ -31,21 +31,27 @@ fi
 if ! command -v git &> /dev/null
 then
   echo "git could not be found"
-  xdg-open https://git-scm.com/downloads &
+  if ! command -v xdg-open &> /dev/null
+    xdg-open https://git-scm.com/downloads &
+  fi
   exit
 fi
 
 if ! command -v node &> /dev/null
 then
   echo "node could not be found"
-  xdg-open https://nodejs.org/en/download/ &
+  if ! command -v xdg-open &> /dev/null
+    xdg-open https://nodejs.org/en/download/ &
+  fi
   exit
 fi
 
 if ! command -v docker-compose &> /dev/null
 then
   echo "docker-compose could not be found"
-  xdg-open https://docs.docker.com/compose/install/ &
+  if ! command -v xdg-open &> /dev/null
+    xdg-open https://docs.docker.com/compose/install/ &
+  fi
   exit
 fi
 
