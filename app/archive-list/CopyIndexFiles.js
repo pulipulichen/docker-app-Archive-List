@@ -4,7 +4,7 @@ const path = require('path');
 const ListFiles = require('../lib/ListFiles')
 
 const isIndexFile = function (file) {
-  console.log(file)
+  // console.log(file)
   return file.endsWith('.note.xlsx') || 
     file.endsWith('.note.docx') ||
     file.startsWith('cluster-windows')

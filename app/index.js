@@ -108,6 +108,8 @@ let main = async function () {
       } 
     }
     else {
+      continue  // 暫時不作還原
+
       // RemoveList(directoryPath)
       let tmpDirectory = await ArchiveToDirectory(directoryPath, false)
       if (!tmpDirectory) {
