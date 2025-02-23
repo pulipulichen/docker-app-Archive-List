@@ -16,11 +16,12 @@ const CopyIndexFiles = function (directoryPath, ENABLE_GDRIVE = false) {
     for (let file of fileList) {
       if (isIndexFile(file)) {
         // console.log(noteFilePath, fs.existsSync(noteFilePath))
-        if (fs.existsSync(file)) {
+        let filePath = path.join(directoryPath + '.bak', file)
+        if (fs.existsSync(filePath)) {
           if (ENABLE_GDRIVE) {
-            fs.copyFileSync(file, path.join(gdriveArchiveDir, path.basename(file)))
+            fs.copyFileSync(filePath, path.join(gdriveArchiveDir, path.basename(filePath)))
           }
-          fs.renameSync(file, path.join(directoryPath, path.basename(file)))
+          fs.renameSync(filePath, path.join(directoryPath, path.basename(filePath)))
         }
       }
     }
