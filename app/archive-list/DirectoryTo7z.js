@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const ShellSpawn = require('./../lib/ShellSpawn')
 
-let DirectoryTo7z = async (folderPath) => {
+let DirectoryTo7z = async (folderPath, recursive = true) => {
 
   // Read all files and directories in the given path
   const items = fs.readdirSync(folderPath);
@@ -17,7 +17,7 @@ let DirectoryTo7z = async (folderPath) => {
   }
 
   let noFiles = false
-  while (true) {
+  while (recursive) {
     let list = fs.readdirSync(folderPath)
     if (list.length > 1) {
       break

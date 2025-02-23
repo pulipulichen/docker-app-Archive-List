@@ -36,7 +36,7 @@ let main = async function () {
     // return console.log(CheckDirecotry(directoryPath))
     if (CheckDirecotry(directoryPath) === false) {
       
-      let archiveFilePath = await DirectoryTo7z(directoryPath)
+      let archiveFilePath = await DirectoryTo7z(directoryPath, false)
       
       // console.log(listFilePath, archiveFilePath)
       // throw new Error(archiveFilePath)
