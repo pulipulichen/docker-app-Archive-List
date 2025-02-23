@@ -4,7 +4,7 @@ const fs = require('fs')
 const ShellSpawn = require('./../lib/ShellSpawn')
 const ShellExec = require('./../lib/ShellExec')
 
-let ArchiveToDirectory = async (directoryPath) => {
+let ArchiveToDirectory = async (directoryPath, recursive = true) => {
   let folderName = path.basename(directoryPath)
   let archiveFilePath = path.join(directoryPath, folderName + '.list.7z')
 
@@ -50,7 +50,7 @@ let ArchiveToDirectory = async (directoryPath) => {
   // ==================
   
   let targetFolder = outputFolderPath
-  while (true) {
+  while (recursive) {
     if (targetFolder && fs.existsSync(targetFolder) && fs.lstatSync(targetFolder).isDirectory()) {
       let list = fs.readdirSync(targetFolder)
       if (list.length > 1) {
