@@ -16,7 +16,7 @@ const RemoveList = require('./archive-list/RemoveList')
 
 // -------------------------------------------------------------
 
-
+const ENABLE_GDRIVE = false
 
 // -------------------------------------------------------------
 
@@ -47,7 +47,7 @@ let main = async function () {
       }
 
       let gdriveArchiveDir = path.join(gdriveDir, path.basename(directoryPath))
-      if (fs.existsSync(gdriveArchiveDir) === false) {
+      if (ENABLE_GDRIVE && fs.existsSync(gdriveArchiveDir) === false) {
         fs.mkdirSync(gdriveArchiveDir)
       }
 
@@ -68,8 +68,10 @@ let main = async function () {
         let noteFilePath = path.join(directoryPath + ".bak", path.basename(directoryPath) + '.note.xlsx')
         // console.log(noteFilePath, fs.existsSync(noteFilePath))
         if (fs.existsSync(noteFilePath)) {
-          fs.copyFileSync(noteFilePath, path.join(directoryPath, path.basename(noteFilePath)))
-          fs.renameSync(noteFilePath, path.join(gdriveArchiveDir, path.basename(noteFilePath)))
+          if (ENABLE_GDRIVE) {
+            fs.copyFileSync(noteFilePath, path.join(gdriveArchiveDir, path.basename(noteFilePath)))
+          }
+          fs.renameSync(noteFilePath, path.join(directoryPath, path.basename(noteFilePath)))
         }
 
         // Remove the backup directory
@@ -88,7 +90,7 @@ let main = async function () {
         fs.rmdirSync(directoryPath + '.bak', { recursive: true });
       
         let gdriveArchiveFile = path.join(gdriveArchiveDir, path.basename(listFilePath))
-        if (fs.existsSync(gdriveArchiveFile) === false) {
+        if (ENABLE_GDRIVE && fs.existsSync(gdriveArchiveFile) === false) {
           console.log({listFilePath, gdriveArchiveFile})
           fs.copyFileSync(listFilePath, gdriveArchiveFile)
         }
@@ -103,8 +105,10 @@ let main = async function () {
             return fs.statSync(itemPath).isFile() && path.extname(item).toLowerCase() === '.xlsx';
         });
 
-        const itemPath = path.join(directoryPath, xlsxFiles[0]);
-        fs.copyFileSync(itemPath, path.join(gdriveArchiveDir, path.basename(itemPath)))
+        if (ENABLE_GDRIVE) {
+          const itemPath = path.join(directoryPath, xlsxFiles[0]);
+          fs.copyFileSync(itemPath, path.join(gdriveArchiveDir, path.basename(itemPath)))
+        }
       } 
     }
     else {
