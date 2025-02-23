@@ -2,6 +2,7 @@
 const path = require('path')
 const fs = require('fs')
 const ShellSpawn = require('./../lib/ShellSpawn')
+const ShellExec = require('./../lib/ShellExec')
 
 let ArchiveToDirectory = async (directoryPath) => {
   let folderName = path.basename(directoryPath)
