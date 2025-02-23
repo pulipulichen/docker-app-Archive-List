@@ -4,12 +4,12 @@ PROJECT_NAME=docker-app-Archive-List
 
 # -------------------
 
-if [ -z "$DOCKER_HOST" ]; then
-    echo "DOCKER_HOST is not set, setting it to 'unix:///run/user/1000/docker.sock'"
-    export DOCKER_HOST="unix:///run/user/1000/docker.sock"
-else
-    echo "DOCKER_HOST is set to '$DOCKER_HOST'"
-fi
+# if [ -z "$DOCKER_HOST" ]; then
+#     echo "DOCKER_HOST is not set, setting it to 'unix:///run/user/1000/docker.sock'"
+#     export DOCKER_HOST="unix:///run/user/1000/docker.sock"
+# else
+#     echo "DOCKER_HOST is set to '$DOCKER_HOST'"
+# fi
 
 # -------------------
 # 檢查有沒有參數
@@ -95,7 +95,7 @@ if [ "${useParams}" == "true" ]; then
     # echo "${var}"
     cd "/tmp/${PROJECT_NAME}"
     node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-    docker-compose up
+    docker compose up
   done
 else
   if [ ! -f "${var}"  ] && [ ! -d "${var}"  ]; then
@@ -104,7 +104,7 @@ else
   fi
   cd "/tmp/${PROJECT_NAME}"
   node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-  docker-compose up
+  docker compose up
 fi
 
 
