@@ -3,8 +3,3 @@ services:
   app:
     build: .
     tty: true
-    command: node /app/split-zip-image-to-half.js "/input/資組.zip"
-    volumes: 
-      - ./app:/app/
-      - ./cache:/cache/
-      - /home/pudding/Documents/ramdisk/20230521-2155/:/input/
