@@ -1,5 +1,5 @@
 {
-  "name": "docker-app-Archive-7-zip",
+  "name": "docker-app-Archive-List",
   "version": "1.0.0",
   "description": "Resize and convert image to ICO format.",
   "main": "index.js",
@@ -11,17 +11,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-app-Archive-7-zip.git"
+    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-app-Archive-List.git"
   },
   "keywords": [
-    "PWA"
+    "Docker-APP",
+    "Node.js",
+    "Excel"
   ],
-  "author": "Pulipuli Chen",
+  "author": {
+    "name": "Yung-Ting Chen",
+    "email": "blog@pulipuli.info",
+    "orcid": "https://orcid.org/0000-0003-3751-610X",
+    "url": "https://blog.pulipuli.info"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pulipulichen/docker-app-Archive-7-zip/issues"
+    "url": "https://github.com/pulipulichen/docker-app-Archive-List/issues"
   },
-  "homepage": "https://github.com/pulipulichen/docker-app-Archive-7-zip#readme",
+  "homepage": "https://github.com/pulipulichen/docker-app-Archive-List#readme",
   "dependencies": {
   }
 }

@@ -2,110 +2,42 @@
 
 PROJECT_NAME=docker-app-Archive-List
 
-# -------------------
+# =================================================================
 
-# if [ -z "$DOCKER_HOST" ]; then
-#     echo "DOCKER_HOST is not set, setting it to 'unix:///run/user/1000/docker.sock'"
-#     export DOCKER_HOST="unix:///run/user/1000/docker.sock"
-# else
-#     echo "DOCKER_HOST is set to '$DOCKER_HOST'"
-# fi
-
-# -------------------
-# 檢查有沒有參數
-
-var="$1"
-useParams="true"
-WORK_DIR=`pwd`
-if [ ! -f "$var" ] && [ ! -d "$var" ]; then
-  # echo "$1 does not exist."
-  # exit
-  var=$(kdialog --getopenfilename --multiple ~/ '*')
-  var=`echo "${var}" | xargs`
-  useParams="false"
-fi
-
-# ------------------
-# 確認環境
-
-if ! command -v git &> /dev/null
-then
-  echo "git could not be found"
-  if command -v xdg-open &> /dev/null
-  then
-    xdg-open https://git-scm.com/downloads &
+getRealpath() {
+  path="$1"
+  if command -v realpath &> /dev/null; then
+    path=`realpath "${path}"`
+  else
+    path=$(cd "$(dirname "${path}")"; pwd)/"$(basename "${path}")"
   fi
-  exit
-fi
+  echo "${path}"
+}
 
-if ! command -v node &> /dev/null
-then
-  echo "node could not be found"
-  if command -v xdg-open &> /dev/null
-  then
-    xdg-open https://nodejs.org/en/download/ &
-  fi
-  exit
-fi
+# =================================================================
 
-if ! command -v docker-compose &> /dev/null
-then
-  echo "docker-compose could not be found"
-  if command -v xdg-open &> /dev/null
-  then
-    xdg-open https://docs.docker.com/compose/install/ &
-  fi
-  exit
-fi
+# Step 1: Create the directory if it doesn't exist
+mkdir -p /tmp/docker-app
 
-# ---------------
-# 安裝或更新專案
+# Step 2: Download the script
+curl -o /tmp/docker-app/docker-app-launcher.sh https://pulipulichen.github.io/docker-app-Launcher/docker-app-launcher.sh
 
-if [ -d "/tmp/${PROJECT_NAME}" ];
-then
-  cd "/tmp/${PROJECT_NAME}"
-  git reset --hard
-  git pull --force
-else
-	# echo "$DIR directory does not exist."
-  cd /tmp
-  git clone "https://github.com/pulipulichen/${PROJECT_NAME}.git"
-  cd "/tmp/${PROJECT_NAME}"
-fi
+# Step 3: Make the script executable
+chmod +x /tmp/docker-app/docker-app-launcher.sh
 
-# -----------------
-# 確認看看要不要做docker-compose build
+# Step 5: Get the script's full path as the second parameter
+SCRIPT_PATH=$(getRealpath "$0")
 
-mkdir -p "/tmp/${PROJECT_NAME}.cache"
+# Step 6: Get all parameters from this script as the third, fourth, ... parameters
+shift 2  # Shift to remove the first two parameters (PROJECT_NAME and SCRIPT_PATH)
+PARAMETERS=("$@")
+for ((i = 0; i < ${#PARAMETERS[@]}; i++)); do
+    PARAMETERS[$i]=$(getRealpath "${PARAMETERS[$i]}")
+done
 
-cmp --silent "/tmp/${PROJECT_NAME}/Dockerfile" "/tmp/${PROJECT_NAME}.cache/Dockerfile" && cmp --silent "/tmp/${PROJECT_NAME}/package.json" "/tmp/${PROJECT_NAME}.cache/package.json" || docker-compose build
-
-cp "/tmp/${PROJECT_NAME}/Dockerfile" "/tmp/${PROJECT_NAME}.cache/"
-cp "/tmp/${PROJECT_NAME}/package.json" "/tmp/${PROJECT_NAME}.cache/"
-
-# -----------------
-# 執行指令
-
-if [ "${useParams}" == "true" ]; then
-  # echo "use parameters"
-  for var in "$@"
-  do
-    cd "${WORK_DIR}"
-    var=`realpath "${var}"`
-    # echo "${var}"
-    cd "/tmp/${PROJECT_NAME}"
-    node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-    docker compose up
-  done
-else
-  if [ ! -f "${var}"  ] && [ ! -d "${var}"  ]; then
-    echo "$var does not exist."
-    exit
-  fi
-  cd "/tmp/${PROJECT_NAME}"
-  node "/tmp/${PROJECT_NAME}/index.js" "${var}"
-  docker compose up
-fi
+# Step 7: Pass parameters to "~/docker-app/docker-app-launcher.sh"
+# /tmp/docker-app/docker-app-launcher.sh "$PROJECT_NAME" "$SCRIPT_PATH" "${PARAMETERS[@]}"
+/tmp/docker-app/docker-app-launcher.sh "$PROJECT_NAME" "$SCRIPT_PATH" "${PARAMETERS[@]}"
 
 
 
