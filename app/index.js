@@ -42,7 +42,7 @@ let main = async function () {
       // throw new Error(archiveFilePath)
 
       let gdriveDir = path.join(path.dirname(directoryPath), 'gdrive')
-      if (fs.existsSync(gdriveDir) === false) {
+      if (ENABLE_GDRIVE && fs.existsSync(gdriveDir) === false) {
         fs.mkdirSync(gdriveDir)
       }
 
