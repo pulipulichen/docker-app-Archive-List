@@ -4,6 +4,7 @@ services:
     image: pudding/docker-app:docker-app-Archive-List-20250223.154059
     tty: true
     command: node /app/index.js "/input/__INPUT__"
+    user: "${UID}:${GID}"
     environment:
       - CONTAINER_NAME=docker-app-archive-list-app
       - LOCAL_VOLUMN_PATH=/input/
